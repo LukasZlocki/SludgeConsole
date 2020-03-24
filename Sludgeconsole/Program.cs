@@ -38,6 +38,11 @@ namespace Sludgeconsole
                     // Todo: code code Bankier();
                     Bankier Bankier = new Bankier();
                     break;
+
+                case "D":
+                    // Todo: code code Bankier();
+                    Money Money = new Money();
+                    break;
             }
         }
 
@@ -58,6 +63,7 @@ namespace Sludgeconsole
             Console.WriteLine("[A] TopStock extraction");
             Console.WriteLine("[B] Strefainwestorow extraction");
             Console.WriteLine("[C] Bankier extraction");
+            Console.WriteLine("[D] Money extraction");
             Console.WriteLine(" ");
             Console.WriteLine("[E] Exit");
             Console.WriteLine(" ");
