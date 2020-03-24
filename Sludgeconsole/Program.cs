@@ -38,6 +38,7 @@ namespace Sludgeconsole
 
                 case "B":
                     //Todo: code code Strefainwestorow();
+                    Strefainwestorow StrefaInvestorow = new Strefainwestorow();
                     break;
 
                 case "C":
@@ -82,26 +83,7 @@ namespace Sludgeconsole
             return _userKey;
         }
 
-
-
-
-
-        #region Dane dla spolek TopStock
-        private static void GetHtmlAsync2(ref string htmlExtracted, string url)
-        {
-            HtmlWeb web2 = new HtmlWeb();
-            var htmlDoc2 = web2.Load(url);
-
-            var htmlBody2 = htmlDoc2.DocumentNode.SelectNodes("//*[@id='stock_company_financial']/div[1]/table[2]/tbody/tr[10]/td[2]");
-            // var htmlBody2 = htmlDoc2.DocumentNode.SelectSingleNode("//div");
-            // Console.WriteLine(htmlBody2.OuterHtml);
-            foreach (var dane in htmlBody2)
-            {
-                Console.WriteLine(dane.OuterHtml);
-            }
-            Console.ReadKey();
-        }
-        #endregion
+    
 
 
         #region Dane dla spolek z strefainwestorow
