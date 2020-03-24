@@ -9,17 +9,39 @@ namespace Sludgeconsole
 {
     class Program
     {
-       
+
         static void Main(string[] args)
         {
+            string UserKey = "";
+
             string Url = @"https://www.bankier.pl/gielda/notowania/akcje/KRUK/wyniki-finansowe/skonsolidowany/roczny/standardowy/1";
             //string Url = @"https://www.topstock.pl/stock/company/KGH";
             string HtmlExtracted = "";
-
             int PozycjaTabela = 1;
 
-            Console.WriteLine("MENU SludgeConsole");
-            Console.WriteLine("Testing of grabbing data on different www")
+
+
+            UserKey = Menu();
+
+            switch (UserKey)
+            {
+                case "E":
+                    Environment.Exit(0);
+                    break;
+
+                case "A":
+                    // Todo : code Topstock();
+                    break;
+
+                case "B":
+                    //Todo: code code Strefainwestorow();
+                    break;
+
+                case "C":
+                    // Todo: code code Bankier();
+                    break;
+            }
+
 
             // GetHtmlAsync1(ref HtmlExtracted, Url);
             GetHtmlAsync3(ref HtmlExtracted, Url, PozycjaTabela);
@@ -28,6 +50,35 @@ namespace Sludgeconsole
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Main Menu
+        /// </summary>
+        /// <returns></returns>
+        private static string Menu()
+        {
+            string _userKey = "";
+
+            Console.Clear();
+            Console.WriteLine("Testing of grabbing methods on www");
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.WriteLine("MENU SludgeConsole");
+            Console.WriteLine(" ");
+            Console.WriteLine("[A] TopStock extraction");
+            Console.WriteLine("[B] Strefainwestorow extraction");
+            Console.WriteLine("[C] Bankier extraction");
+            Console.WriteLine(" ");
+            Console.WriteLine("[E] Exit");
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.Write("-->> ");
+            _userKey = Console.ReadLine();
+            Console.Clear();
+
+            return _userKey;
+        }
+
+
         #region Dane dla spolek TopStock
         private static void GetHtmlAsync2(ref string htmlExtracted, string url)
         {
@@ -35,11 +86,11 @@ namespace Sludgeconsole
             var htmlDoc2 = web2.Load(url);
 
             var htmlBody2 = htmlDoc2.DocumentNode.SelectNodes("//*[@id='stock_company_financial']/div[1]/table[2]/tbody/tr[10]/td[2]");
-           // var htmlBody2 = htmlDoc2.DocumentNode.SelectSingleNode("//div");
-           // Console.WriteLine(htmlBody2.OuterHtml);
+            // var htmlBody2 = htmlDoc2.DocumentNode.SelectSingleNode("//div");
+            // Console.WriteLine(htmlBody2.OuterHtml);
             foreach (var dane in htmlBody2)
-            {       
-               Console.WriteLine(dane.OuterHtml);
+            {
+                Console.WriteLine(dane.OuterHtml);
             }
             Console.ReadKey();
         }
@@ -73,10 +124,10 @@ namespace Sludgeconsole
             var htmlDoc1 = web1.Load(url);
 
             var htmlBody1 = htmlDoc1.DocumentNode.SelectSingleNode("//tbody");
-            
-            Console.WriteLine(htmlBody1.OuterHtml);        
-            
-            Console.ReadKey();         
+
+            Console.WriteLine(htmlBody1.OuterHtml);
+
+            Console.ReadKey();
             #endregion
 
 
@@ -96,10 +147,10 @@ namespace Sludgeconsole
                 Console.WriteLine(informacja.InnerText);
                 _tempString = Convert.ToString(informacja.InnerHtml);
 
-                Zamiana zamiana = new Zamiana();  
+                Zamiana zamiana = new Zamiana();
                 _finalnaLiczba = zamiana.ZamianaNaLiczbe(_tempString);
-                Console.WriteLine("Po Trimie ->>"+_finalnaLiczba);
-                
+                Console.WriteLine("Po Trimie ->>" + _finalnaLiczba);
+
             }
 
             Console.ReadKey();
@@ -122,23 +173,23 @@ namespace Sludgeconsole
             Console.WriteLine("Extrakcja danych z tabeli finansowej");
             foreach (var daneFin in extractedData)
             {
-                
-                  //  Console.WriteLine("***** dane finansowe ***");
-                  //  Console.WriteLine(daneFin.InnerText);
-             
+
+                //  Console.WriteLine("***** dane finansowe ***");
+                //  Console.WriteLine(daneFin.InnerText);
+
                 if (_counter == pozycjaTabela)
                 {
                     string _zamienione = "";
-                    
+
                     Zamiana zamiana = new Zamiana();
                     _zamienione = zamiana.ZamianaNaLiczbe(daneFin.InnerText);
-               
-                    Console.WriteLine("Wyciagniete dane ------------------>> " + _zamienione);                  
+
+                    Console.WriteLine("Wyciagniete dane ------------------>> " + _zamienione);
                 }
 
                 _counter++;
                 if (_counter == 4) { _counter = 0; }
-                
+
             }
             Console.ReadKey();
         }
