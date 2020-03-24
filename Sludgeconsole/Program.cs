@@ -69,7 +69,7 @@ namespace Sludgeconsole
             Console.WriteLine("[B] Strefainwestorow extraction");
             Console.WriteLine("[C] Bankier extraction");
             Console.WriteLine("[D] Money extraction");
-            Console.WriteLine("[F] Money extraction");
+            Console.WriteLine("[F] Biznesradar extraction");
             Console.WriteLine(" ");
             Console.WriteLine("[E] Exit");
             Console.WriteLine(" ");

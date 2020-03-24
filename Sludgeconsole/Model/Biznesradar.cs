@@ -27,11 +27,31 @@ namespace Sludgeconsole.Model
             HtmlWeb web = new HtmlWeb();
             var htmlDoc = web.Load(url);
 
+            /* OK do wyluskiwania danych z tabeli
+            var extractedData = htmlDoc.DocumentNode.SelectNodes("//tr[contains(@data-field, 'IncomeCostOfSales')]/td/span");
+            */
             var extractedData = htmlDoc.DocumentNode.SelectNodes("//th[contains(@class, 'thq h')]");
 
+
+            int i = 0;
+            string convertedString = "";
             foreach (var extracted in extractedData)
             {
-                Console.WriteLine("" + extracted.InnerText);
+               // Console.WriteLine("" + extracted.InnerText);
+                StringConverter stringConvert = new StringConverter();
+                convertedString = stringConvert.RepleaceString(extracted.InnerText,"\t");
+                convertedString = stringConvert.RepleaceString(convertedString, "\n");
+                try
+                {
+                    i = Convert.ToInt32(convertedString);
+                    Console.WriteLine("" + i);
+                }
+                catch
+                {
+                    Console.WriteLine("Error !" );
+                }
+
+
             }
 
         }
