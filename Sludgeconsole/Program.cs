@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 
 using System.IO;
+using Sludgeconsole.Model;
 
 namespace Sludgeconsole
 {
@@ -14,8 +15,8 @@ namespace Sludgeconsole
         {
             string UserKey = "";
 
-            string Url = @"https://www.bankier.pl/gielda/notowania/akcje/KRUK/wyniki-finansowe/skonsolidowany/roczny/standardowy/1";
-            //string Url = @"https://www.topstock.pl/stock/company/KGH";
+            string Url1 = @"https://www.bankier.pl/gielda/notowania/akcje/KRUK/wyniki-finansowe/skonsolidowany/roczny/standardowy/1";
+            string Url2 = @"https://www.topstock.pl/stock/company/KGH";
             string HtmlExtracted = "";
             int PozycjaTabela = 1;
 
@@ -26,11 +27,13 @@ namespace Sludgeconsole
             switch (UserKey)
             {
                 case "E":
+                    // Exit
                     Environment.Exit(0);
                     break;
 
                 case "A":
                     // Todo : code Topstock();
+                    TopStock TopStock = new TopStock();
                     break;
 
                 case "B":
@@ -42,12 +45,13 @@ namespace Sludgeconsole
                     break;
             }
 
-
+            /*
             // GetHtmlAsync1(ref HtmlExtracted, Url);
             GetHtmlAsync3(ref HtmlExtracted, Url, PozycjaTabela);
             Console.WriteLine(HtmlExtracted);
 
             Console.ReadKey();
+            */
         }
 
         /// <summary>
@@ -77,6 +81,9 @@ namespace Sludgeconsole
 
             return _userKey;
         }
+
+
+
 
 
         #region Dane dla spolek TopStock
